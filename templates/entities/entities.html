@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content  %}
+
+<head>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'main.css' %}">
+
+</head>
+<section class="entities">
+  <div class="container">
+    <h1>Entity List</h1>
+    {% if entities %}
+    {% for entity in entities  %}
+    <a href="/entities/{{entity.entityID}}">
+      <div class="entity_container">
+        <img class="entity_img" src="{{static|add:entity.image.url}}" />
+        <h2 class="entity_name"> {{ entity.name }} </h2>
+        <h5 class="entity_origin"> {{ entity.get_origin_display }}</h5>
+        <h5 class="entity_title"> {{ entity.title }} </h5>
+      </div>
+    </a>
+    {% endfor %}
+    {% else %}
+    <div class="none">
+      <h2> No Entities found - something went wrong </h2>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock  %}

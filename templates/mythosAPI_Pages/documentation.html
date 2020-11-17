@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'main.css' %}">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.1/styles/atom-one-light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.1/highlight.min.js"></script>
+<script>
+        hljs.initHighlightingOnLoad();
+    </script>
+</head>
+<div class="container_documentation">
+    <div class="wrapper_getAll">
+        <h1> Documentation </h1>
+        <p class="brief"> How to use the Mythos API - examples using Jquery </p>
+        <h2> Get all Entities </h2>
+        <div>
+            <pre><code class="markdown"> https://mythosapi.herokuapp.com/entities/api</code></pre>
+        </div>
+        <div class="desc_getAll">
+            <div>
+                <h3> Jquery </h3>
+                <pre><code class="javascript">
+            $.ajax({
+                url: "https://mythosapi.herokuapp.com/entities/api/",
+                type: 'get',
+                success: function (data) {
+                    alert("do something")
+                }
+            })
+        </code></pre>
+            </div>
+            <div class="JSON_res">
+                <h3> JSON: </h3>
+                <pre class="JSON_block"><code class="json" id="json-1"></code></pre>
+                <script>
+                    $.ajax({
+                        url: "https://mythosapi.herokuapp.com/entities/api/",
+                        type: 'get',
+                        success: function (data) {
+                            var div = document.getElementById('json-1');
+                            div.innerHTML = div.innerHTML + JSON.stringify(data, null, " ");
+                            hljs.highlightBlock(document.getElementById('json-1'))
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper_getSingle">
+        <h2> Get Single Entity </h2>
+        <div>
+            <pre><code class="markdown"> https://mythosapi.herokuapp.com/entities/api/2/name-of-entity || entityID </code></pre>
+        </div>
+        <div class="desc_getSingle">
+            The names are case sensitive <br>
+        </div>
+        <div>
+            <h3> Jquery </h3>
+            <pre><code class="javascript">
+            $.ajax({
+                url: "https://mythosapi.herokuapp.com/entities/api/Zeus",
+                type: 'get',
+                success: function (data) {
+                    alert("do something")
+                }
+            })
+        </code></pre>
+        </div>
+        <div class="JSON_res">
+            <h3> JSON: </h3>
+            <div class="JSON_block">
+                <pre><code class="json" id="json-2"></code></pre>
+            </div>
+            <script>
+                $.ajax({
+                    url: "https://mythosapi.herokuapp.com/entities/api/Zeus",
+                    type: 'get',
+                    success: function (data) {
+                        var div = document.getElementById('json-2');
+                        div.innerHTML = div.innerHTML + JSON.stringify(data, null, " ");
+                        hljs.highlightBlock(document.getElementById('json-2'))
+                    }
+                });
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock %}
